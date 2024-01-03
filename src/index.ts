@@ -60,6 +60,7 @@ const scrapeUrl = (url: string) => {
               }
             });
         });
+        resolve(true);
       })
       .on("error", (err) => {
         console.error(`Error: ${err}`);
@@ -68,11 +69,11 @@ const scrapeUrl = (url: string) => {
 };
 
 const processData = (
-  rank: RegExpMatchArray | null,
-  title: RegExpMatchArray | null,
-  points: RegExpMatchArray | null,
-  author: RegExpMatchArray | null,
-  comments: RegExpMatchArray
+  rank: RegExpMatchArray | null | string[],
+  title: RegExpMatchArray | null | string[],
+  points: RegExpMatchArray | null | string[],
+  author: RegExpMatchArray | null | string[],
+  comments: RegExpMatchArray | null | string[]
 ) => ({
   rank: rank ? rank[1] : null,
   title: title ? title[1] : null,
@@ -90,8 +91,11 @@ const scrapeMultipleUrls = async () => {
   const jsonResult = JSON.stringify(results, null, 2);
   fs.writeFileSync("results.json", jsonResult);
   console.log("Results saved as results.json");
+  return true;
 };
 
 scrapeMultipleUrls();
 
+
+export { scrapeUrl, processData, scrapeMultipleUrls };
 
