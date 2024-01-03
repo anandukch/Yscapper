@@ -4,8 +4,8 @@ This project is a web scraping tool built using the core modules of Node.js. It 
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/project-name.git`
-2. Navigate to the project directory: `cd project-name`
+1. Clone the repository: `git clone https://github.com/anandukch/Yscapper.git`
+2. Navigate to the project directory: `cd Yscapper`
 3. Install the dependencies: `npm install`
 
 ## Usage
