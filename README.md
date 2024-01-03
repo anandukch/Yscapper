@@ -14,5 +14,9 @@ To start the project in development mode, run the following command:
 ```shell
     npm run start:dev
 ```
+To run test
+```shell
+    npm run test:dev
+```
 
 
