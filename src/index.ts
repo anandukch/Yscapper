@@ -1,7 +1,7 @@
 import * as http from "https";
 import * as fs from "fs";
 
-const results = {
+const results: Results = {
   "0-100": [],
   "101-200": [],
   "201-300": [],
@@ -32,7 +32,6 @@ const scrapeUrl = (url: string) => {
           data
             .split('<tr class="spacer" style="height:5px"></tr>')
             .forEach((item, i) => {
-
               const rank = item.match(rankRegex) || null;
               const title = item.match(titleRegex) || null;
               const points = item.match(pointsRegex) || null;
@@ -40,13 +39,13 @@ const scrapeUrl = (url: string) => {
               const comments = item.match(commentsRegex) || null;
               if (comments) {
                 const commentsCount = parseInt(comments[1], 10);
-                const processedData = processData(
+                const processedData = processData({
                   rank,
                   title,
                   points,
                   author,
-                  comments
-                );
+                  comments,
+                });
 
                 if (commentsCount >= 0 && commentsCount <= 100) {
                   results["0-100"].push(processedData);
@@ -68,13 +67,7 @@ const scrapeUrl = (url: string) => {
   });
 };
 
-const processData = (
-  rank: RegExpMatchArray | null | string[],
-  title: RegExpMatchArray | null | string[],
-  points: RegExpMatchArray | null | string[],
-  author: RegExpMatchArray | null | string[],
-  comments: RegExpMatchArray | null | string[]
-) => ({
+const processData = ({ rank, title, points, author, comments }: DataType) => ({
   rank: rank ? rank[1] : null,
   title: title ? title[1] : null,
   points: points ? points[1] : null,
@@ -96,6 +89,4 @@ const scrapeMultipleUrls = async () => {
 
 scrapeMultipleUrls();
 
-
 export { scrapeUrl, processData, scrapeMultipleUrls };
-

@@ -1,7 +1,7 @@
 // tslint:disable: only-arrow-functions
 import { expect } from "chai";
-import { processData, scrapeUrl, scrapeMultipleUrls } from "../src";
-import assert = require('assert');
+import { processData, scrapeUrl } from "../src";
+import assert = require("assert");
 
 describe("Index module", function () {
   describe("expected behavior", function () {
@@ -11,7 +11,13 @@ describe("Index module", function () {
       const points = [null, "100"];
       const author = [null, "author"];
       const comments = [null, "100"];
-      const processedData = processData(rank, title, points, author, comments);
+      const processedData = processData({
+        rank,
+        title,
+        points,
+        author,
+        comments,
+      });
       expect(processedData).to.deep.equal({
         rank: "1",
         title: "title",
@@ -20,10 +26,11 @@ describe("Index module", function () {
         comments: "100",
       });
     });
-    it("scrape url should work correctly", async ()=>{
-      return await scrapeUrl("https://news.ycombinator.com/?p=1").then((res)=>{
-        expect(res).to.equal(true);
-      }
+    it("scrape url should work correctly", async () => {
+      return await scrapeUrl("https://news.ycombinator.com/?p=1").then(
+        (res) => {
+          expect(res).to.equal(true);
+        }
       );
     });
   });
